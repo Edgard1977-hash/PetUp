@@ -5,7 +5,6 @@ import PetScanner from "./components/PetScanner";
 import MetricsGrid from "./components/MetricsGrid";
 import AnalysisReportModal from "./components/AnalysisReportModal";
 import AddPetModal from "./components/AddPetModal";
-import AddPetQuizModal from "./components/AddPetQuizModal";
 import CameraView from "./components/CameraView";
 import GroupsView from "./components/GroupsView";
 import ProgressView from "./components/ProgressView";
@@ -904,7 +903,6 @@ export default function App() {
   // Modals state
   const [activeReport, setActiveReport] = useState<AnalysisReport | null>(null);
   const [showAddPetModal, setShowAddPetModal] = useState(false);
-  const [showAddPetQuizFromFab, setShowAddPetQuizFromFab] = useState(false);
   const [showAppleActionSheet, setShowAppleActionSheet] = useState(false);
   const [showQuickScanCamera, setShowQuickScanCamera] = useState(false);
   const [isQuickAnalyzing, setIsQuickAnalyzing] = useState(false);
@@ -3497,7 +3495,7 @@ export default function App() {
         onChangeTab={setActiveNavTab}
         isMenuOpen={showAppleActionSheet}
         onToggleMenu={setShowAppleActionSheet}
-        onAddPet={() => setShowAddPetQuizFromFab(true)}
+        onAddPet={() => setShowAddPetModal(true)}
         onCheckPet={handleTriggerCheckPet}
         currentLanguage={currentLanguage}
       />
@@ -3553,21 +3551,6 @@ export default function App() {
           />
         )}
       </AnimatePresence>
-
-      {/* Add Pet Quiz Modal (triggered from FAB plus button -> directs to settings) */}
-      <AddPetQuizModal
-        isOpen={showAddPetQuizFromFab}
-        onClose={() => {
-          setShowAddPetQuizFromFab(false);
-          setActiveNavTab("settings");
-        }}
-        onAddPet={(newPet) => {
-          handleAddPet(newPet);
-          setShowAddPetQuizFromFab(false);
-          setActiveNavTab("settings");
-        }}
-        currentLanguage={currentLanguage}
-      />
 
       {/* Profile & Account Settings Modal */}
       <AnimatePresence>

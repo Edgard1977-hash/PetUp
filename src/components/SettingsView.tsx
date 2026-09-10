@@ -93,7 +93,7 @@ export interface SettingsViewProps {
 }
 
 export default function SettingsView({
-  currentLanguage = "ru",
+  currentLanguage: _currentLanguage,
   animateEntrance = false,
   pets = [],
   activePetId = "dog",
@@ -1020,7 +1020,6 @@ export default function SettingsView({
         isOpen={showAddPetQuiz}
         onClose={() => setShowAddPetQuiz(false)}
         onAddPet={handleAddNewPet}
-        currentLanguage={currentLanguage === "en" ? "en" : "ru"}
       />
     </div>
   );
