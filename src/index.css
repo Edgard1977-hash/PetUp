@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@400;600;700;800;900&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-geologica: "Geologica", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f5f4fa;
+  color: #1c1c1e; /* Classic iOS dark gray text */
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Onboarding scope isolation: initial screens NEVER change with theme */
+html.onboarding-scope,
+html.onboarding-scope body,
+html.onboarding-scope * {
+  color-scheme: light !important;
+}
+
+/* 1. Main Background: Pure black everywhere (#000000) */
+html.dark:not(.onboarding-scope) body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.dark:not(.onboarding-scope) .bg-\[\#f5f4fa\],
+html.dark:not(.onboarding-scope) .bg-\[\#F8F9FA\],
+html.dark:not(.onboarding-scope) .bg-\[\#f4f5f7\],
+html.dark:not(.onboarding-scope) .app-canvas {
+  background-color: #000000 !important;
+}
+
+/* 2. Plaques (Cards / Containers) Gradient: 1C1C1E(Снизу) - 202022(сверху) WITHOUT ANY BORDERS */
+.plaque-gradient {
+  background: linear-gradient(180deg, #202022 0%, #1C1C1E 100%) !important;
+}
+
+html.dark:not(.onboarding-scope) .plaque-gradient,
+html.dark:not(.onboarding-scope) [data-plaque="true"],
+html.dark:not(.onboarding-scope) .card-plaque,
+html.dark:not(.onboarding-scope) div.bg-white:not(.keep-white):not([data-colored-bg="true"] *):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.bg-red-500 *):not(.bg-green-500 *):not(.bg-blue-600 *):not(.bg-zinc-950 *):not(.bg-black *):not(button):not(input) {
+  background: linear-gradient(180deg, #202022 0%, #1C1C1E 100%) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Убираем обводку из темной темы как запрошено ("убрать обводку из темной темы") */
+html.dark:not(.onboarding-scope) .border:not(.keep-border),
+html.dark:not(.onboarding-scope) .border-2:not(.keep-border),
+html.dark:not(.onboarding-scope) .border-t:not(.keep-border),
+html.dark:not(.onboarding-scope) .border-b:not(.keep-border),
+html.dark:not(.onboarding-scope) .border-l:not(.keep-border),
+html.dark:not(.onboarding-scope) .border-r:not(.keep-border),
+html.dark:not(.onboarding-scope) .border-black\/\[0\.02\],
+html.dark:not(.onboarding-scope) .border-black\/\[0\.03\],
+html.dark:not(.onboarding-scope) .border-black\/\[0\.04\],
+html.dark:not(.onboarding-scope) .border-black\/\[0\.06\],
+html.dark:not(.onboarding-scope) .border-white\/10,
+html.dark:not(.onboarding-scope) .border-white\/20,
+html.dark:not(.onboarding-scope) .border-white\/\[0\.08\],
+html.dark:not(.onboarding-scope) .border-zinc-300,
+html.dark:not(.onboarding-scope) .border-zinc-200,
+html.dark:not(.onboarding-scope) .border-zinc-150,
+html.dark:not(.onboarding-scope) .border-zinc-100 {
+  border-color: transparent !important;
+}
+
+/* 3. "Черное – становится белым, а белое – черным (не считая объектов которые находятся на разноцветных цветах, и также то что будет стоять на черном цвете - оно должно остаться белым если оно было белое)" */
+
+/* Кнопки, которые в светлой теме были черными (bg-black или bg-[#1c1c1e]), на темном фоне становятся белыми с черным текстом */
+html.dark:not(.onboarding-scope) button.bg-black:not(.keep-black-bg):not([data-nav="true"]),
+html.dark:not(.onboarding-scope) button.bg-\[\#1c1c1e\]:not(.keep-black-bg),
+html.dark:not(.onboarding-scope) button.bg-\[\#1C1C1E\]:not(.keep-black-bg),
+html.dark:not(.onboarding-scope) .action-primary-btn {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+html.dark:not(.onboarding-scope) button.bg-black:not(.keep-black-bg):not([data-nav="true"]) *,
+html.dark:not(.onboarding-scope) button.bg-\[\#1c1c1e\]:not(.keep-black-bg) *,
+html.dark:not(.onboarding-scope) button.bg-\[\#1C1C1E\]:not(.keep-black-bg) * {
+  color: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Кнопка Sign in with Apple должна ВСЕГДА оставаться черной с белым текстом и белым яблоком в любой теме */
+.apple-auth-btn,
+.keep-black-bg,
+html.dark:not(.onboarding-scope) .apple-auth-btn,
+html.dark:not(.onboarding-scope) .keep-black-bg,
+html:not(.dark) .apple-auth-btn,
+html:not(.dark) .keep-black-bg {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+.apple-auth-btn *,
+.keep-black-bg *,
+html.dark:not(.onboarding-scope) .apple-auth-btn *,
+html.dark:not(.onboarding-scope) .keep-black-bg *,
+html:not(.dark) .apple-auth-btn *,
+html:not(.dark) .keep-black-bg * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Кнопка Sign in with Google должна ВСЕГДА оставаться белой с черным текстом */
+.google-auth-btn,
+html.dark:not(.onboarding-scope) .google-auth-btn,
+html:not(.dark) .google-auth-btn {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+}
+
+.google-auth-btn *,
+.google-auth-btn span,
+.google-auth-btn div,
+html.dark:not(.onboarding-scope) .google-auth-btn *,
+html.dark:not(.onboarding-scope) .google-auth-btn span,
+html.dark:not(.onboarding-scope) .google-auth-btn div,
+html:not(.dark) .google-auth-btn *,
+html:not(.dark) .google-auth-btn span,
+html:not(.dark) .google-auth-btn div {
+  color: #000000 !important;
+}
+
+/* Кнопки в шапке попапов (крестик и переключатель режима) */
+.modal-circle-btn,
+.modal-toggle-btn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html.dark:not(.onboarding-scope) .modal-circle-btn,
+html.dark:not(.onboarding-scope) .modal-toggle-btn {
+  background-color: #000000 !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html.dark:not(.onboarding-scope) .modal-circle-btn *,
+html.dark:not(.onboarding-scope) .modal-toggle-btn * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Элементы, которые должны оставаться БЕЛЫМИ на темном/черном фоне (табы, активные плашки 0.5x/1x, затвор, и т.д.) */
+.keep-white,
+html.dark:not(.onboarding-scope) .keep-white,
+html.dark:not(.onboarding-scope) .dark\:bg-white,
+html.dark:not(.onboarding-scope) [data-keep-white="true"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+}
+
+/* Текст и иконки на белых элементах остаются черными */
+.keep-white *,
+.keep-black,
+html.dark:not(.onboarding-scope) .keep-white *,
+html.dark:not(.onboarding-scope) .keep-black {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* Текст и заголовки на черном/сером фоне в темной теме всегда БЕЛЫЕ */
+html.dark:not(.onboarding-scope) .text-\[\#1c1c1e\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-\[\#1C1C1E\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-\[\#18181b\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-zinc-900:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-zinc-800:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-zinc-700:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-\[\#374151\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-black:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) .text-\[\#f5f5f7\]:not(.keep-black):not(.keep-white *) {
+  color: #ffffff !important;
+}
+
+/* Подтекст (второстепенный текст, описания, подписи, метки) в темной теме — слегка серый (#98989D) */
+html.dark:not(.onboarding-scope) .text-\[\#8E8E93\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#8e8e93\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#6e6e78\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#636366\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#6b7280\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#7C7C80\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#98989D\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#98989d\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#C7C7CC\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#8e98a4\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-\[\#4b5563\]:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-zinc-600:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-zinc-500:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-zinc-400:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-zinc-300:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-gray-500:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) .text-gray-400:not(.keep-black):not(.bg-\[\#183BA7\] *):not(.bg-\[\#006AFF\] *):not(.bg-\[\#007AFF\] *):not(.keep-white *):not(.dark\:bg-white *) {
+  color: #98989D !important;
+}
+
+/* Иконки основных элементов — белые */
+html.dark:not(.onboarding-scope) svg.text-black:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) svg.text-zinc-900:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) svg.text-zinc-800:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) svg.text-\[\#1c1c1e\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *),
+html.dark:not(.onboarding-scope) svg.text-\[\#1C1C1E\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *):not(button.bg-black *):not(button.bg-\[\#1c1c1e\] *):not(button.bg-\[\#1C1C1E\] *) {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Иконки подтекста / шевронов / второстепенных меток — слегка серые (#98989D) */
+html.dark:not(.onboarding-scope) svg.text-zinc-700:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-zinc-600:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-zinc-500:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-zinc-400:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-\[\#8E8E93\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-\[\#8e8e93\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-\[\#7C7C80\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-\[\#98989D\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-\[\#C7C7CC\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *),
+html.dark:not(.onboarding-scope) svg.text-\[\#6e6e78\]:not(.keep-black):not(.keep-white *):not(.dark\:bg-white *) {
+  color: #98989D !important;
+  stroke: #98989D !important;
+}
+
+/* Внутренние плашки/поля ввода в темной теме без обводок */
+html.dark:not(.onboarding-scope) .bg-zinc-50:not(.keep-bg),
+html.dark:not(.onboarding-scope) .bg-zinc-100:not(.keep-bg),
+html.dark:not(.onboarding-scope) .bg-\[\#f4f5f7\]:not(.keep-bg),
+html.dark:not(.onboarding-scope) .bg-\[\#F2F2F7\]:not(.keep-bg),
+html.dark:not(.onboarding-scope) .bg-\[\#eaedf0\]:not(.keep-bg),
+html.dark:not(.onboarding-scope) .bg-\[\#e5e5eb\]:not(.keep-bg) {
+  background-color: #19191B !important;
+  border-color: transparent !important;
+}
+
+/* Круговые диаграммы: четкий, нормальный серый цвет для фонового круга / трека */
+.chart-track-ring {
+  stroke: #E5E5EA !important;
+}
+html.dark:not(.onboarding-scope) .chart-track-ring {
+  stroke: #3A3A3C !important;
+}
+
+/* Серые кружки пустых дней в прогрессе и календаре */
+html.dark:not(.onboarding-scope) .bg-\[\#E5E5EA\],
+html.dark:not(.onboarding-scope) .bg-\[\#e5e5eb\] {
+  background-color: #2C2C2E !important;
+  border-color: transparent !important;
+}
+
+/* Smooth custom scrollbars for interactive panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d1d6;
+  border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3a3a3c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c7c7cc;
+}
+
